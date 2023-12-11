@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//変更する
+//変更する2

@@ -11,7 +11,10 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
+        \Debugbar::info(1);
+
+        return view('board');
+       
     }
 
     /**

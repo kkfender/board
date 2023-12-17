@@ -18,7 +18,7 @@ class BoardController extends Controller
         $localName = LocalName::get()->toArray();
         $prefecture = Prefecture::get()->toArray();
 
-        return view('board', compact('prefecture', 'localName'));
+        return view('boards.index', compact('prefecture', 'localName'));
        
     }
 
@@ -27,7 +27,9 @@ class BoardController extends Controller
      */
     public function create()
     {
-        //
+        $localName = LocalName::get()->toArray();
+        $prefecture = Prefecture::get()->toArray();
+        return view('boards.create', compact('prefecture', 'localName'));
     }
 
     /**

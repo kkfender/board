@@ -3,7 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{{dump(localName)}}
+
+ <a href="{{route("board.create")}}">create</a>
+
 {% for hoge in localName %}
 {{hoge.name}}
 {% endfor %}

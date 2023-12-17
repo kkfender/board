@@ -12,6 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        DB::statement('SET foreign_key_checks = 0');
+        Schema::dropIfExists('boards');
+        Schema::dropIfExists('prefectures');
+        Schema::dropIfExists('local_names');
+        DB::statement('SET foreign_key_checks = 1');
+
         Schema::create('local_names', function (Blueprint $table) {
             $table->string('id')->unique();
             $table->string('name', 100);
@@ -102,15 +109,14 @@ return new class extends Migration
             $table->string('name', 100);
             $table->text('body');
             $table->string('email', 100);
-            $table->unsignedBigInteger('prefecture_id')->nullable();
+            $table->unsignedBigInteger('prefecture_id');
             $table->integer('operation_key');
             $table->timestamps();
 
             $table
                 ->foreign('prefecture_id')
                 ->references('id')
-                ->on('prefectures')
-                ->onDelete('set null');
+                ->on('prefectures');
 
             $table->unique(['id']);
         });

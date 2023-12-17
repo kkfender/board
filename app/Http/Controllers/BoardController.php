@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\Prefecture;
+use App\Models\LocalName;
 
 class BoardController extends Controller
 {
@@ -13,10 +14,11 @@ class BoardController extends Controller
      */
     public function index()
     {
-        \Debugbar::info(Prefecture::get()->toArray());
+        \Debugbar::info(LocalName::get()->toArray());
+        $localName = LocalName::get()->toArray();
         $prefecture = Prefecture::get()->toArray();
 
-        return view('board', compact('prefecture'));
+        return view('board', compact('prefecture', 'localName'));
        
     }
 

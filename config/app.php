@@ -194,6 +194,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class
 
     ],
 
@@ -212,4 +213,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'aliases' => [
+        // ...
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
+    ]
 ];

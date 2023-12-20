@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Board;
+use App\Models\Prefecture;
 
 class BoardController extends Controller
 {
@@ -11,9 +13,10 @@ class BoardController extends Controller
      */
     public function index()
     {
-        \Debugbar::info(1);
+        \Debugbar::info(Prefecture::get()->toArray());
+        $prefecture = Prefecture::get()->toArray();
 
-        return view('board');
+        return view('board', compact('prefecture'));
        
     }
 

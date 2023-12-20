@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Prefecture;
+use App\Models\Board;
 
-class Board extends Model
+class Prefecture extends Model
 {
     use HasFactory;
 
     //relation
-    public function prefecture()
+    public function boards()
     {
-        return $this->belongsTo(Prefecture::class);
+        return $this->hasMany(Board::class);
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -99,9 +100,10 @@ return new class extends Migration
             $table->id('id');
             $table->tinyText('title');
             $table->string('name', 100);
-            $table->text('comment');
+            $table->text('body');
             $table->string('email', 100);
             $table->unsignedBigInteger('prefecture_id')->nullable();
+            $table->integer('operation_key');
             $table->timestamps();
 
             $table

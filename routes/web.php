@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('board', 'App\Http\Controllers\BoardController');
+Route::resource('boards', 'App\Http\Controllers\BoardController');

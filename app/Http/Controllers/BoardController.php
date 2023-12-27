@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Board;
 use App\Models\Prefecture;
 use App\Models\LocalName;
@@ -14,20 +15,26 @@ class BoardController extends Controller
      */
     public function index()
     {
-        \Debugbar::info(LocalName::get()->toArray());
         $localName = LocalName::get()->toArray();
         $prefecture = Prefecture::get()->toArray();
 
-        return view('board', compact('prefecture', 'localName'));
-       
+        return view('boards.index', compact('prefecture', 'localName'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(FormBuilder $formBuilder)
     {
-        //
+        $localName = LocalName::get()->toArray();
+        $prefecture = Prefecture::get()->toArray();
+
+             $form = $formBuilder->create(\App\Forms\SubmissionForm::class, [
+            'method' => 'POST',
+            'url'    => route('boards.store'),
+        ]);
+        return view('boards.create', compact('form', 'prefecture', 'localName'));
     }
 
     /**
@@ -35,7 +42,20 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \Debugbar::info($request);
+        $board = new Board();
+
+        //locationのキーを探す
+        dd();
+        $board->name  = $request->input('name');
+        $board->title = $request->input('title');
+        $board->body  = $request->input('body');
+        $board->email = $request->input('email');
+        $board->location = $request->input('location');
+        $board->operation_key = $request->input('operation_key');
+
+        $board->save();
+
     }
 
     /**

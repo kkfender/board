@@ -191,6 +191,7 @@ return [
             'head',
             'last',
             'mix',
+            'form',
         ],
 
         /*

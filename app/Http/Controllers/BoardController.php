@@ -15,10 +15,11 @@ class BoardController extends Controller
      */
     public function index()
     {
-        $localName = LocalName::get()->toArray();
-        $prefecture = Prefecture::get()->toArray();
+        $localNames = LocalName::get()->toArray();
+        $prefectures = Prefecture::get()->toArray();
+        $boards = Board::get()->toArray();
 
-        return view('boards.index', compact('prefecture', 'localName'));
+        return view('boards.index', compact('prefectures', 'localNames', 'boards'));
 
     }
 
@@ -42,20 +43,18 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        \Debugbar::info($request);
         $board = new Board();
 
-        //locationのキーを探す
-        dd();
         $board->name  = $request->input('name');
         $board->title = $request->input('title');
         $board->body  = $request->input('body');
         $board->email = $request->input('email');
-        $board->location = $request->input('location');
+        $board->prefecture_id = $request->input('prefecture_id');
         $board->operation_key = $request->input('operation_key');
 
         $board->save();
 
+        return view('boards.index');
     }
 
     /**

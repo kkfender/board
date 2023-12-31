@@ -215,6 +215,7 @@ return [
 
     'aliases' => [
         // ...
-        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
     ]
 ];

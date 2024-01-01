@@ -5,7 +5,6 @@
 {% block content %}
 
  <a href="{{route("boards.create")}}">create</a>
-{{dump(this)}}
 {% for hoge in boards %}
 {{hoge.name}}
 {% endfor %}

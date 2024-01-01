@@ -57,6 +57,7 @@ class BoardController extends Controller
         return view('boards.index');
     }
 
+
     /**
      * Display the specified resource.
      */

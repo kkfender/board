@@ -1,1 +1,8 @@
-create
+{% extends 'layouts/base.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{{form(form)| raw}}
+{% endblock %}

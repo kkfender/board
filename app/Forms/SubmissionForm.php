@@ -3,11 +3,15 @@
 namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
+use App\Models\Prefecture;
 
 class SubmissionForm extends Form
 {
     public function buildForm()
     {
+        $prefectures = Prefecture::get();
+        $prefectures = $prefectures->pluck('name','id')->toArray();
+
         $this
             ->add('title', 'text', [
                 'label' => '題名',
@@ -21,9 +25,10 @@ class SubmissionForm extends Form
                 'label' => 'メールアドレス',
                 'rules' => 'required|email'
             ])
-            ->add('location', 'text', [
-                'label' => '場所`',
+            ->add('prefecture_id', 'select', [
+                'label' => '場所',
                 'rules' => 'required',
+                'choices' => $prefectures,
             ])
             ->add('body', 'textarea', [
                 'label' => '本文',
@@ -31,7 +36,7 @@ class SubmissionForm extends Form
             ])
             ->add('operation_key', 'text', [
                 'label' => '編集削除キー',
-                'rules' => 'required',
+                'rules' => 'required|integer',
             ])
             ->add('submit', 'submit', ['label' => '保存']);
     }

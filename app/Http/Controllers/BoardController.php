@@ -15,10 +15,11 @@ class BoardController extends Controller
      */
     public function index()
     {
-        $localName = LocalName::get()->toArray();
-        $prefecture = Prefecture::get()->toArray();
+        $localNames = LocalName::get()->toArray();
+        $prefectures = Prefecture::get()->toArray();
+        $boards = Board::get()->toArray();
 
-        return view('boards.index', compact('prefecture', 'localName'));
+        return view('boards.index', compact('prefectures', 'localNames', 'boards'));
 
     }
 

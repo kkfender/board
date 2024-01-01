@@ -5,8 +5,7 @@
 {% block content %}
 
  <a href="{{route("boards.create")}}">create</a>
-
-{% for hoge in localName %}
+{% for hoge in boards %}
 {{hoge.name}}
 {% endfor %}
 {% endblock %}

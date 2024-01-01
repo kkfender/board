@@ -5,7 +5,28 @@
 {% block content %}
 
  <a href="{{route("boards.create")}}">create</a>
-{% for hoge in boards %}
-{{hoge.name}}
+ <div id="table">
+	<table summary="トピック一覧" class="table table-striped">
+		<tbody>
+        <tr class="table-primary">
+			<th style="width: 8%;">No.</th>
+			<th style="width: 43%;">題名</th>
+			<th style="width: 16%;">名前</th>
+			<th style="width: 10%;">場所</th>
+			<th style="width: auto;">登録日時</th>
+		</tr>
+        {% for board in boards %}
+        <tr class="cycle1">
+			<th style="width: 8%;">{{board.id}}</th>
+			<th style="width: 43%;">{{board.title}}</th>
+			<th style="width: 16%;">{{board.name}}</th>
+			<th style="width: 10%;">{{board.prefecture.name}}</th>
+			<th style="width: auto;">{{board.created_at}}</th>
+		</tr>
 {% endfor %}
+
+	</tbody>
+    </table>
+</div>
+
 {% endblock %}

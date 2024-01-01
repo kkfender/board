@@ -17,7 +17,7 @@ class BoardController extends Controller
     {
         $localNames = LocalName::get()->toArray();
         $prefectures = Prefecture::get()->toArray();
-        $boards = Board::get()->toArray();
+        $boards = Board::with('prefecture')->get()->toArray();
 
         return view('boards.index', compact('prefectures', 'localNames', 'boards'));
 
@@ -31,7 +31,7 @@ class BoardController extends Controller
         $localName = LocalName::get()->toArray();
         $prefecture = Prefecture::get()->toArray();
 
-             $form = $formBuilder->create(\App\Forms\SubmissionForm::class, [
+        $form = $formBuilder->create(\App\Forms\SubmissionForm::class, [
             'method' => 'POST',
             'url'    => route('boards.store'),
         ]);

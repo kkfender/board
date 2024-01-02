@@ -5,6 +5,7 @@ namespace App\Forms;
 use Kris\LaravelFormBuilder\Form;
 use App\Models\Prefecture;
 use App\Models\Board;
+use Illuminate\Support\Facades\Log;
 
 class SubmissionForm extends Form
 {
@@ -13,8 +14,9 @@ class SubmissionForm extends Form
         $prefectures = Prefecture::get();
         $prefectures = $prefectures->pluck('name','id')->toArray();
 
-        //sinnkisaskuseito分けるほうがいいかもしれない
-        $board = Board::find($this->data['id']) ? Board::find($this->data['id']) : 0;
+
+        \Debugbar::info($this->data);
+        $board = enpty($this->data['id']) ? Board::find($this->data['id']) : 0;
 
         $this
             ->add('title', 'text', [

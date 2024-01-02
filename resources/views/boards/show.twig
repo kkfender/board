@@ -3,11 +3,18 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
+{% if session('messages') %}
+  <div class="alert alert-primary" role="alert">
+    {{session('messages')}}
+  </div>
+{% endif %}
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div id="table">
-        <table summary="トピック一覧" class="table table-striped">      <div id="table">
+        <table summary="トピック一覧" class="table table-striped">
+        <div id="table">
         <tr class="table-primary">
           <th style="width: 8%;">No.</th>
           <th style="width: 43%;">題名</th>
@@ -15,7 +22,7 @@
           <th style="width: 43%;">内容</th>
           <th style="width: 10%;">場所</th>
           <th style="width: auto;">登録日時</th>
-          
+
         </tr>
           <tr class="cycle1">
           <th style="width: 8%;">{{board.id}}</th>

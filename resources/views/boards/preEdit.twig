@@ -4,10 +4,11 @@
 
 {% block content %}
 {% if session('messages') %}
-<div class="alert alert-danger" role="alert">
-{{session('messages')}}
-</div>
+  <div class="alert alert-danger" role="alert">
+    {{session('messages')}}
+  </div>
 {% endif %}
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8 offset-md-2">

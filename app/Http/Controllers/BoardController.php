@@ -17,10 +17,9 @@ class BoardController extends Controller
     {
         $localNames = LocalName::get()->toArray();
         $prefectures = Prefecture::get()->toArray();
-        $boards = Board::with('prefecture')->get()->toArray();
+        $boards = Board::with('prefecture')->orderBy('id', 'desc')->get()->toArray();
 
         return view('boards.index', compact('prefectures', 'localNames', 'boards'));
-
     }
 
     /**
@@ -54,7 +53,7 @@ class BoardController extends Controller
 
         $board->save();
 
-        return view('boards.index');
+        return redirect ('boards');
     }
 
 
@@ -63,15 +62,40 @@ class BoardController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $board = Board::with('prefecture')->find($id)->toArray();
+        return view('boards.show', compact('board'));
+    }
+
+    public function preEdit(FormBuilder $formBuilder, string $id)
+    {
+        $form = $formBuilder->create(\App\Forms\PreEditForm::class, [
+            'method' => 'GET',
+            'url'    => route('boards.edit', $id),
+        ]);
+
+        return view('boards.preEdit',compact('form'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(FormBuilder $formBuilder, Request $request)
     {
-        //
+        $isKey = Board::where('id', $request->input('id'))
+                        ->where('operation_key', $request->input('operation_key'))
+                        ->first();
+
+        if (is_null($isKey))
+        {
+            return  back()->with('messages', '編集削除キーが正しくありません');
+        }
+
+        $form = $formBuilder->create(\App\Forms\SubmissionForm::class, [
+            'method' => 'POST',
+            'url'    => route('boards.update', $request->input('id')),
+        ]);
+        return view('boards.edit', compact('form'));
+
     }
 
     /**
@@ -79,7 +103,18 @@ class BoardController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $board = Board::find($id);
+
+        $board->name  = $request->input('name');
+        $board->title = $request->input('title');
+        $board->body  = $request->input('body');
+        $board->email = $request->input('email');
+        $board->prefecture_id = $request->input('prefecture_id');
+        $board->operation_key = $request->input('operation_key');
+
+        $board->save();
+
+        return view('boards.show', compact('board'));
     }
 
     /**

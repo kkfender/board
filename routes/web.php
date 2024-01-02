@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('boards', 'App\Http\Controllers\BoardController');
+Route::get('boards/{board}/preEdit', 'App\Http\Controllers\BoardController@preEdit')->name('boards.preEdit');

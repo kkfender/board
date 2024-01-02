@@ -192,6 +192,14 @@ return [
             'last',
             'mix',
             'form',
+            'form_start',
+            'form_rest',
+            'form_end',
+            'form_row',
+            'form_label',
+            'form_widget',
+            'form_error',
+            'form_until',
         ],
 
         /*

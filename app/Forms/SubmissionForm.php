@@ -13,7 +13,8 @@ class SubmissionForm extends Form
         $prefectures = Prefecture::get();
         $prefectures = $prefectures->pluck('name','id')->toArray();
 
-        $board = Board::find($this->data['id']);
+        //sinnkisaskuseito分けるほうがいいかもしれない
+        $board = Board::find($this->data['id']) ? Board::find($this->data['id']) : 0;
 
         $this
             ->add('title', 'text', [

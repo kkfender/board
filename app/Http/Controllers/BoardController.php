@@ -93,9 +93,7 @@ class BoardController extends Controller
 
         if ($request->input('name') == 'delete')
         {
-            return redirect()->action(
-                [BoardController::class, 'destroy'], ['board' => $request->input('id')]
-            );
+            return $this->destroy($request->input('id'));
         }
 
         $form = $formBuilder->create(\App\Forms\SubmissionForm::class, [
@@ -131,6 +129,9 @@ class BoardController extends Controller
      */
     public function destroy(string $id)
     {
-        dd(9);
+        $board = Board::find($id);
+        $board->delete();
+
+        return $this->index();
     }
 }

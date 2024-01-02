@@ -12,7 +12,8 @@ class PreEditForm extends Form
         $this
             ->add('id', 'text', [
                 'label' => '投稿No',
-                'rules' => 'required|integer' 
+                'rules' => 'required|integer',
+                'default_value' => $this->data['id'],
             ])
             ->add('operation_key', 'text', [
                 'label' => '編集削除キー',

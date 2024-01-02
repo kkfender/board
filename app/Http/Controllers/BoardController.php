@@ -53,7 +53,7 @@ class BoardController extends Controller
 
         $board->save();
 
-        return redirect ('boards');
+        return redirect('boards');
     }
 
 
@@ -71,6 +71,7 @@ class BoardController extends Controller
         $form = $formBuilder->create(\App\Forms\PreEditForm::class, [
             'method' => 'GET',
             'url'    => route('boards.edit', $id),
+            'data'   => ['id' => $id],
         ]);
 
         return view('boards.preEdit',compact('form'));
@@ -91,11 +92,12 @@ class BoardController extends Controller
         }
 
         $form = $formBuilder->create(\App\Forms\SubmissionForm::class, [
-            'method' => 'POST',
+            'method' => 'PATCH',
             'url'    => route('boards.update', $request->input('id')),
+            'data'   => ['id' => $request->input('id')],
         ]);
-        return view('boards.edit', compact('form'));
 
+        return view('boards.edit', compact('form'));
     }
 
     /**
@@ -114,7 +116,7 @@ class BoardController extends Controller
 
         $board->save();
 
-        return view('boards.show', compact('board'));
+        return view('boards.show', compact('board'))->with('messages', '更新に成功しました');
     }
 
     /**

@@ -88,7 +88,14 @@ class BoardController extends Controller
 
         if (is_null($isKey))
         {
-            return  back()->with('messages', '編集削除キーが正しくありません');
+            return back()->with('messages', '編集削除キーが正しくありません');
+        }
+
+        if ($request->input('name') == 'delete')
+        {
+            return redirect()->action(
+                [BoardController::class, 'destroy'], ['board' => $request->input('id')]
+            );
         }
 
         $form = $formBuilder->create(\App\Forms\SubmissionForm::class, [
@@ -124,6 +131,6 @@ class BoardController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd(9);
     }
 }

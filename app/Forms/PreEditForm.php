@@ -19,6 +19,10 @@ class PreEditForm extends Form
                 'label' => '編集削除キー',
                 'rules' => 'required|integer'
             ])
-            ->add('submit', 'submit', ['label' => '保存']);
+            ->add('submit', 'submit', [
+                'label' => '編集',
+
+            ]);
+
     }
 }
